@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from './components/Button';
 import Header from './components/Header';
+import ListItem from './components/ListItem';
 import PageTitle from './components/PageTitle';
 import TextInput from './components/TextInput';
+import { getAlbums } from './services/albums';
 import './styles/pages/_main.scss';
+import { Album } from './types/albums';
 
 function App() {
-  const [list, setList] = useState([]);
-
-
+  const [list, setList] = useState<Album[]>([]);
 
   const openAddImageModal = () =>{ 
     console.log('open');
@@ -17,6 +18,15 @@ function App() {
   const search = () => {
     console.log('search');
   }
+
+  const fetchData = useCallback( async()=>{
+    const res = await getAlbums();
+    setList(res.data);
+  },[]);
+
+  useEffect(()=>{
+    fetchData();
+  },[fetchData]);
 
   return (
     <>
@@ -27,21 +37,16 @@ function App() {
           <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={openAddImageModal}/>
         </div>
 
-
         <div className='search-section'>
           <div className='search-input'>
             <TextInput enableClear={true} placeholder={'Search'} showIcon={true} onChange={search}/>
           </div>
         </div>
 
-
-
-
-        <ul>
-          <li>
-            <p>Title</p>
-            <div>Image</div>
-          </li>
+        <ul className='images'>
+          {list.map((item,index) => {
+            return (<ListItem title={item.title} key={index}/>)
+          })}
         </ul>
 
         <div>
@@ -55,7 +60,6 @@ function App() {
             <li>5</li>
             <li>Next</li>
             <li>End</li>
-
           </ul>
         </div>
       </div>

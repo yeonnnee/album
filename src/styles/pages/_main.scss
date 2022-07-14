@@ -16,7 +16,7 @@
   .search-section {
     margin: 20px 0;
     padding: 20px 0;
-
+  
     .search-input {
       position: relative;
       float: right;
@@ -45,6 +45,39 @@
         color: $red;
         cursor: pointer;
       }
+    }
+  }
+
+  .images {
+    margin: 40px 0;
+    padding: 20px 0 0;
+    border-top: 1px solid $gray;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin: 0 20px 20px 0;
+      cursor: pointer;
+
+      &:nth-last-child(1) {
+        margin:  0;
+      }
+
+      .image-title {
+        padding: 12px 5px;
+        margin: -3px 0 0;
+        border: 1px solid $strong-gray;
+        border-top: none;
+        text-align: left;
+
+        p {
+          width:200px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+        }
+      }
+
     }
   }
 }

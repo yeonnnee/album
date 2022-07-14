@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from './components/Button';
 import Header from './components/Header';
 import PageTitle from './components/PageTitle';
+import TextInput from './components/TextInput';
 import './styles/pages/_main.scss';
 
 function App() {
@@ -13,19 +14,29 @@ function App() {
     console.log('open');
   }
 
+  const search = () => {
+    console.log('search');
+  }
+
   return (
     <>
       <Header />
       <div className='main-content'>
         <div className='content-title'>
-          <PageTitle title={"Images"} total={200}/>
+          <PageTitle title={"Images"} total={list.length}/>
           <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={openAddImageModal}/>
         </div>
 
 
-        <div>
-          <input type="text" placeholder='Search'/>
+        <div className='search-section'>
+          <div className='search-input'>
+            <TextInput enableClear={true} placeholder={'Search'} showIcon={true} onChange={search}/>
+          </div>
         </div>
+
+
+
+
         <ul>
           <li>
             <p>Title</p>

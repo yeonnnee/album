@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
+import Button from './components/Button';
 import Header from './components/Header';
 import PageTitle from './components/PageTitle';
+import './styles/pages/_main.scss';
 
 function App() {
   const [list, setList] = useState([]);
 
+
+
+  const openAddImageModal = () =>{ 
+    console.log('open');
+  }
+
   return (
     <>
       <Header />
-      <div>
-        <PageTitle title={"Images"} total={200}/>
+      <div className='main-content'>
+        <div className='content-title'>
+          <PageTitle title={"Images"} total={200}/>
+          <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={openAddImageModal}/>
+        </div>
 
-        <div><button>+Add Image</button></div>
 
         <div>
           <input type="text" placeholder='Search'/>

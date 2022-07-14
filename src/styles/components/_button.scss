@@ -1,0 +1,25 @@
+@import '../constants/colors';
+
+button {
+
+  &.add {
+    background-color: $blue;
+    padding: 8px 10px;
+  }
+
+  &.cancel {
+    background-color: $red;
+  }
+
+  &.confirm {
+    background-color: #fff;
+  }
+
+  &.square {
+    border-radius: 5px;
+  }
+
+  &.circle {
+    border-radius: 50%;
+  }
+}

@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './styles/App.scss';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import PageTitle from './components/PageTitle';
 
 function App() {
+  const [list, setList] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <div>
+        <PageTitle title={"Images"} total={200}/>
+
+        <div><button>+Add Image</button></div>
+
+        <div>
+          <input type="text" placeholder='Search'/>
+        </div>
+        <ul>
+          <li>
+            <p>Title</p>
+            <div>Image</div>
+          </li>
+        </ul>
+
+        <div>
+          <ul>
+            <li>Start</li>
+            <li>prev</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>Next</li>
+            <li>End</li>
+
+          </ul>
+        </div>
+      </div>
+    </>
+
+  )
 }
 
 export default App;

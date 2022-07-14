@@ -21,7 +21,7 @@ function App() {
 
   const fetchData = useCallback( async()=>{
     const res = await getAlbums();
-    setList(res.data);
+    setList(res.data.slice(0, 5));
   },[]);
 
   useEffect(()=>{

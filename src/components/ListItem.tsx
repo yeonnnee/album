@@ -14,7 +14,7 @@ export default function ListItem(props: ListItemProps) {
     <li className="item">
       <img src="https://place-hold.it/300" alt={title}/>
       <div className='image-title'>
-        <p>{title}</p>
+        <p className='title'>{title}</p>
         <More id={id.toString()}/>
       </div>
     </li>

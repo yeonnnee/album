@@ -4,6 +4,7 @@ import { Album } from "../types/albums";
 
 export interface AlbumState {
   data: Album[],
+  searchResult: Album[],
   total: number,
   currentPage: number,
   totalPage: number,
@@ -12,6 +13,7 @@ export interface AlbumState {
 
 const initialState: AlbumState = {
   data: [],
+  searchResult: [],
   total: 0,
   currentPage: 1,
   totalPage: 1,
@@ -25,10 +27,11 @@ const albumSlice = createSlice({
     getAblums: (state, action: PayloadAction<Album[]>) => {
       return state = {
         ...state,
-        data: action.payload.slice(0, 5),
+        searchResult: action.payload.slice(0, 5),
+        data: action.payload,
         total: action.payload.length,
         currentPage: 1,
-        totalPage: Math.ceil(state.total / state.size)
+        totalPage: Math.ceil(action.payload.length / state.size)
       }
     },
     addAlbum: (state, action: PayloadAction<Album>) => {
@@ -54,11 +57,15 @@ const albumSlice = createSlice({
     },
 
     getAlbumsByPage: (state, action: PayloadAction<number>) => {
-
+      return state = {
+        ...state,
+        currentPage: action.payload,
+        searchResult: state.data.slice((action.payload - 1) * 5, action.payload * 5)
+      }
     }
   }
 });
 
 
-export const { getAblums, addAlbum, deleteAlbum, editAlbum} = albumSlice.actions;
+export const { getAblums, addAlbum, deleteAlbum, editAlbum, getAlbumsByPage} = albumSlice.actions;
 export default albumSlice.reducer;

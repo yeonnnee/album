@@ -1,0 +1,31 @@
+@import '../constants/colors';
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+
+  li {
+    margin: 0 32px 0 0;
+    cursor: pointer;
+
+    &:nth-last-child(1) {
+      margin: 0;
+    }
+
+    &.current {
+      color: $pink;
+    }
+
+    &.disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
+
+    &:hover {
+      color: $pink;
+      opacity: 0.6;
+    }
+  }
+}

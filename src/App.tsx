@@ -47,13 +47,13 @@ function App() {
         </div>
 
         <ul className='images'>
-          {albums.data?.map((d: Album,index:number) => {
+          {albums.searchResult?.map((d: Album,index:number) => {
             return (<ListItem title={d.title} id={d.id} key={index}/>)
           })}
         </ul>
 
         <div>
-         <Pagination total={100} cnt={5}/>
+         <Pagination />
         </div>
       </div>
     </>

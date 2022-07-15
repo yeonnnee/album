@@ -22,7 +22,16 @@ const albumSlice = createSlice({
   name:'album',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Album>) => {
+    getAblums: (state, action: PayloadAction<Album[]>) => {
+      return state = {
+        ...state,
+        data: action.payload.slice(0, 5),
+        total: action.payload.length,
+        currentPage: 1,
+        totalPage: Math.ceil(state.total / state.size)
+      }
+    },
+    addAlbum: (state, action: PayloadAction<Album>) => {
       state = {
         ...state,
         data: [action.payload, ...state.data],
@@ -32,14 +41,14 @@ const albumSlice = createSlice({
       }
 
     },
-    delete: (state, action: PayloadAction<number>) => {
+    deleteAlbum: (state, action: PayloadAction<number>) => {
       state = {
         ...state,
         data: state.data.filter(album => album.id !== action.payload),
         totalPage: Math.ceil(state.total / state.size)
       }
     },
-    edit: (state, action: PayloadAction<number, string>) => {
+    editAlbum: (state, action: PayloadAction<number, string>) => {
       console.log('eidt', action);
 
     },
@@ -50,4 +59,6 @@ const albumSlice = createSlice({
   }
 });
 
+
+export const { getAblums, addAlbum, deleteAlbum, editAlbum} = albumSlice.actions;
 export default albumSlice.reducer;

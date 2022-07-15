@@ -14,14 +14,11 @@ import './styles/pages/_main.scss';
 import { Album } from './types/albums';
 
 function App() {
-  const [searchString, setSearchString] = useState<string>('')
+  const [searchString, setSearchString] = useState<string>('');
+  const [openAddImageModal, setOpenAddImageModal] = useState(false);
   const albums = useSelector((state:RootState) => state.album);
   const dispatch = useDispatch();
   const {data, error, isLoading} = useGetAlbumsQuery(null);
-
-  const openAddImageModal = () =>{ 
-    console.log('open');
-  }
 
   const search = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key !== 'Enter' || searchString.length === 0) return;
@@ -50,7 +47,7 @@ function App() {
       <div className='main-content'>
         <div className='content-title'>
           <PageTitle title={"Images"} total={albums.total}/>
-          <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={openAddImageModal}/>
+          <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={() => setOpenAddImageModal(true)}/>
         </div>
 
         <div className='search-section'>
@@ -69,7 +66,7 @@ function App() {
         {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>
 
-      <FileUploadeModal />
+      {openAddImageModal ?  <FileUploadeModal mode={"add"} onCancel={()=>setOpenAddImageModal(false)}/> : null}
     </>
 
   )

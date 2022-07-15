@@ -12,17 +12,19 @@ interface TextInputProps {
   reset?:() => void,
   id?: string,
   label?: string
+  error?: string
 }
 
 export default function TextInput(props: TextInputProps) {
-  const { placeholder, value, showIcon, onChange, onKeyUp, reset, label, id } = props;
+  const { placeholder, value, showIcon, onChange, onKeyUp, reset, error, label, id } = props;
 
   return(
     <>
       { showIcon ? <FontAwesomeIcon icon={ faSearch } /> : null }
       { label ? <label htmlFor={id}>{label}</label> : null }
-      <input id={id} type="text" placeholder={placeholder} value={value || ''} onChange={onChange} onKeyUp={onKeyUp}/>
+      <input className={error ? 'invalid' : '' } id={id} type="text" placeholder={placeholder} value={value || ''} onChange={onChange} onKeyUp={onKeyUp}/>
       {reset && value.length > 0 ? <span onClick={reset}>x</span> : null}
+      {error ? <p className='error-message'>{error}</p> : null}    
     </>
   )
 }

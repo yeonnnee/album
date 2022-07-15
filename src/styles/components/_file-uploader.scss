@@ -17,18 +17,22 @@
     cursor: pointer;
 
     .fa-cloud-arrow-up {
-      margin: 10px 0 0;
+      margin: 20px 0 0;
       font-size: 44px;
       color: $sky-blue;
     }
 
     p {
-      margin: 23px 0 0;
+      margin: 10px 0 0;
       font-weight: normal;
     }
 
     &:hover {
       opacity: 1;
+    }
+
+    &.invalid {
+      border: 1px dotted $red;
     }
   }
 }

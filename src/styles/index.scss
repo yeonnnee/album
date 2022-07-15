@@ -1,3 +1,4 @@
+@import './constants/colors';
 
 html,
 body {
@@ -50,5 +51,10 @@ a {
 
 input[type="checkbox"], input[type="radio"]  {
   display: none;
+}
+
+.error-message {
+  font-size: 13px;
+  color: $red;
 }
 

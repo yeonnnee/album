@@ -12,7 +12,6 @@
     top: 20%;
     left: 35%;
     width: 450px;
-    height: 400px;
     border-radius: 10px;
     background-color: #fff;
 
@@ -41,6 +40,10 @@
         padding: 10px;
         margin: 5px 0 0;
         border: 1px solid $strong-gray;
+
+        &.invalid {
+          border: 1px solid $red;
+        }
       }
     }
 

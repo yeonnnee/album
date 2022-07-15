@@ -52,9 +52,8 @@ function App() {
           })}
         </ul>
 
-        <div>
-         <Pagination />
-        </div>
+        
+        {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>
     </>
 

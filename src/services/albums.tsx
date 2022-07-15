@@ -1,15 +1,16 @@
-import axios, { AxiosPromise } from "axios";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Album } from "../types/albums";
 
-const api = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+
+export const albumApi = createApi({
+  reducerPath: 'albumApi',
+  baseQuery:fetchBaseQuery({baseUrl:'https://jsonplaceholder.typicode.com'}),
+  endpoints: (builder) => ({
+    getAlbums: builder.query<Album[], null>({
+      query: () => '/albums'
+    })
+  })
 });
 
 
-
-export const getAlbums: () => AxiosPromise<Album[]> = async() => {
-  const res = await api.get('/albums');
-
-  return res;
-};
-
+export const {useGetAlbumsQuery} = albumApi;

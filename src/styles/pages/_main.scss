@@ -1,7 +1,7 @@
 @import '../constants/colors';
 
 .main-content {
-  padding: 20px;
+  padding: 49px 20px 20px;
 
   .content-title {
     display: flex;
@@ -63,6 +63,7 @@
       display: inline-block;
       margin: 0 20px 20px 0;
       cursor: pointer;
+      box-shadow: 2px 3px 10px #c0bdbd;
 
       &:nth-last-child(1) {
         margin:  0;
@@ -71,8 +72,6 @@
       .image-title {
         padding: 12px 5px;
         margin: -3px 0 0;
-        border: 1px solid $strong-gray;
-        border-top: none;
         text-align: left;
 
         .title {
@@ -81,6 +80,12 @@
           text-overflow:ellipsis;
           white-space:nowrap;
         }
+      }
+
+      &:hover {
+        box-shadow: 2px 3px 5px $strong-gray;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
       }
 
     }

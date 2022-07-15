@@ -31,7 +31,7 @@ export default function Pagination () {
       <li className={currentPage === 1 ? 'disabled' : ''}>
         <FontAwesomeIcon icon={faAngleLeft} onClick={getPrevPage}/>
       </li>
-      { currentPage > totalPage - 10 ? <li onClick={() => dispatch(getAlbumsByPage(1))}>1</li> : null }
+      { totalPage > 5  && currentPage > totalPage - 10 ? <li onClick={() => dispatch(getAlbumsByPage(1))}>1</li> : null }
       { totalPage > 5 && currentPage > totalPage - 10 ? <li>...</li> : null }
 
       { 

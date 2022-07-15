@@ -1,6 +1,6 @@
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/components/_file-uploader.scss';
 
 export default function FileUploader () {
@@ -10,6 +10,16 @@ export default function FileUploader () {
     const file = e.target.value.replace(/C:\\fakepath\\/, '');
     setFileName(file);
   }
+
+  useEffect(() => {
+    document.body.style.cssText = `overflow:hidden`;
+    window.scrollTo(0, 0);
+
+    return () => {
+      document.body.style.cssText = '';
+    };
+  }, []);
+  
 
   return(
     <div className='file-uploader'>

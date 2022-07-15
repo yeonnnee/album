@@ -58,8 +58,21 @@ const albumSlice = createSlice({
         totalPage: Math.ceil(state.total / state.size)
       }
     },
-    editAlbum: (state, action: PayloadAction<number, string>) => {
-      console.log('eidt', action);
+    editAlbum: (state, action: PayloadAction<{id: number, title: string}>) => {
+      return state = {
+        ...state,
+        data: state.data.map(d => {
+          if(d.id === action.payload.id) {
+            return {
+              ...d,
+              title: action.payload.title
+            }
+          }
+          return d;
+        }),
+        searchResult: state.data.slice((state.currentPage - 1) * 5, state.currentPage * 5)
+      }
+      
 
     },
 

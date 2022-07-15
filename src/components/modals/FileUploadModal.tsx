@@ -3,14 +3,16 @@ import Button from "../Button";
 import TextInput from "../TextInput";
 import '../../styles/components/_file-upload-modal.scss';
 import { useDispatch } from "react-redux";
-import { addAlbum } from "../../reducers/albumSlice";
+import { addAlbum, editAlbum } from "../../reducers/albumSlice";
 import FileUploader from "../FileUploader";
 
 
 interface FileUploadeModalProps {
+  isActive: boolean,
   mode: 'add' | 'edit',
   onCancel: () => void,
   originTitle?: string,
+  id?: number
 }
 
 interface Value {
@@ -19,12 +21,12 @@ interface Value {
 }
 
 export default function FileUploadeModal(props: FileUploadeModalProps) {
-  const {mode, onCancel, originTitle} = props;
+  const {mode, onCancel, originTitle, isActive, id} = props;
   const [title, setTitle] = useState<Value>({text: originTitle || '', error: ''});
   const [fileName, setFileName] = useState<Value>({text: '', error: ''});
   const dispatch = useDispatch();
 
-  function onSave() {
+  function validation() {
     if(!title.text) {
       setTitle({ ...title, error: 'Required'}); 
     };
@@ -33,8 +35,18 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
       setFileName({ ...fileName, error: 'Required'}); 
       return;
     }
+  }
 
+  function onSave() {
+    validation();
     dispatch(addAlbum(title.text));
+    onCancel();
+  }
+
+  function onEdit() {
+    if(!id) return;
+    validation();
+    dispatch(editAlbum({id: id, title: title.text}));
     onCancel();
   }
 
@@ -50,27 +62,40 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
   }
 
   return(
-    <div className="file-upload-modal">
-      <div className="modal-content">
-        <div className="modal-header">{mode === 'add' ? 'Upload' : 'Edit'}</div>
+    <>
+    {
+      isActive ? 
+      <div className="file-upload-modal">
+        <div className="modal-content">
+          <div className="modal-header">{mode === 'add' ? 'Upload' : 'Edit'}</div>
 
-        <div className="modal-form">
-          <TextInput 
-            label={"Title"} 
-            error={title.error} 
-            placeholder={'Enter the image title'} 
-            showIcon={false} 
-            onChange={setValue} 
-            value={title.text}
-          />
-          <FileUploader uploadFile={uploadFile} fileName={fileName.text} error={fileName.error}/>
-        </div>
+          <div className="modal-form">
+            <TextInput 
+              label={"Title"} 
+              error={title.error} 
+              placeholder={'Enter the image title'} 
+              showIcon={false} 
+              onChange={setValue} 
+              value={title.text}
+            />
+            <FileUploader uploadFile={uploadFile} fileName={fileName.text} error={fileName.error}/>
+          </div>
 
-        <div className="buttons">
-          <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
-          <Button text={'Save'} type={"confirm"} shape={"circle"} onClick={onSave}/>
+          <div className="buttons">
+            <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
+            {
+              mode === 'add' ?
+              <Button text={'Save'} type={"confirm"} shape={"circle"} onClick={onSave}/>
+              :
+              <Button text={'Edit'} type={"confirm"} shape={"circle"} onClick={onEdit}/>
+            }
+          </div>
         </div>
-      </div>
-    </div>
+      </div> 
+      : 
+      null
+    }
+    </>
+   
   )
 }

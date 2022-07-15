@@ -16,9 +16,6 @@ export default function ConfirmModal(props: ConfirmModalProps) {
       {
         isActive ? 
         <div className="confirm-modal">
-          <div className="close-btn">
-            <Button text={'X'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
-          </div>
           <p className="message">{text}</p>
           <div className="buttons">
             <Button text={'취소'} type={"cancel"} shape={"circle"} onClick={onCancel}/>

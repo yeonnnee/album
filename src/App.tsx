@@ -66,7 +66,7 @@ function App() {
         {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>
 
-      {openAddImageModal ?  <FileUploadeModal mode={"add"} onCancel={()=>setOpenAddImageModal(false)}/> : null}
+      <FileUploadeModal isActive={openAddImageModal} mode={"add"} onCancel={()=>setOpenAddImageModal(false)}/>
     </>
 
   )

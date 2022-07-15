@@ -33,7 +33,7 @@ export default function More(props: MoreProps) {
         </ul>
       </div>
 
-      <ConfirmModal isActive={openConfirmModal} text={'정말 삭제하시겠습니까?'} onCancel={()=> setOpenConfirmModal(false)} onConfirm={deleteItem}/>
+      <ConfirmModal isActive={openConfirmModal} text={'Are you sure you want to delete it?'} onCancel={()=> setOpenConfirmModal(false)} onConfirm={deleteItem}/>
     </>
 
   )

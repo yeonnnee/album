@@ -18,8 +18,8 @@ export default function ConfirmModal(props: ConfirmModalProps) {
         <div className="confirm-modal">
           <p className="message">{text}</p>
           <div className="buttons">
-            <Button text={'취소'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
-            <Button text={'확인'} type={"confirm"} shape={"circle"} onClick={onConfirm}/>
+            <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
+            <Button text={'Confirm'} type={"confirm"} shape={"circle"} onClick={onConfirm}/>
           </div>
         </div> 
         : 

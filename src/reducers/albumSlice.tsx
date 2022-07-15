@@ -58,6 +58,27 @@ const albumSlice = createSlice({
 
     },
 
+    searchAlbum: (state, action: PayloadAction<{type: 'search' | 'reset', payload: string}>) => {
+      if(action.payload.type === 'search') {
+        return state = {
+          ...state,
+          currentPage: 1,
+          searchResult: state.data.filter(album => album.title.includes(action.payload.payload)).slice(0, 5),
+          total: state.searchResult.length,
+          totalPage: Math.ceil(state.total / state.size)
+        }
+      } else {
+        return state = {
+          ...state,
+          currentPage: 1,
+          searchResult: state.data.slice(0, 5),
+          total: state.data.length,
+          totalPage: Math.ceil(state.data.length / state.size)
+        }
+      }
+  
+    },
+
     getAlbumsByPage: (state, action: PayloadAction<number>) => {
       return state = {
         ...state,
@@ -69,5 +90,5 @@ const albumSlice = createSlice({
 });
 
 
-export const { getAblums, addAlbum, deleteAlbum, editAlbum, getAlbumsByPage} = albumSlice.actions;
+export const { getAblums, addAlbum, deleteAlbum, editAlbum, getAlbumsByPage, searchAlbum} = albumSlice.actions;
 export default albumSlice.reducer;

@@ -31,8 +31,8 @@ export default function More(props: MoreProps) {
           <FontAwesomeIcon icon={faEllipsis}/>
         </label>
         <ul className='option-list'>
-          <li onClick={() => setOpenEditModal(true)}>수정하기 <FontAwesomeIcon icon={faPenToSquare}/></li>
-          <li onClick={()=> setOpenConfirmModal(true)}>삭제하기 <FontAwesomeIcon icon={faTrash}/></li>
+          <li onClick={() => setOpenEditModal(true)}>Edit <FontAwesomeIcon icon={faPenToSquare}/></li>
+          <li onClick={()=> setOpenConfirmModal(true)}>Delete <FontAwesomeIcon icon={faTrash}/></li>
         </ul>
       </div>
 

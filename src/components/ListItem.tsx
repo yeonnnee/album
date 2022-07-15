@@ -1,6 +1,4 @@
-import React from 'react';
 import More from './More';
-
 
 export interface ListItemProps {
   title: string,
@@ -15,7 +13,7 @@ export default function ListItem(props: ListItemProps) {
       <img src="https://place-hold.it/300" alt={title}/>
       <div className='image-title'>
         <p className='title'>{title}</p>
-        <More id={id.toString()}/>
+        <More title={title} id={id.toString()}/>
       </div>
     </li>
   )

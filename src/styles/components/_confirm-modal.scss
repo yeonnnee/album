@@ -10,7 +10,7 @@
   width: 330px;
   border-radius: 10px;
   text-align: center;
-  border: 1px solid $strong-gray;
+  box-shadow: 2px 2px 11px $strong-gray;
 
   .buttons {
     margin: 32px 0 0;
@@ -26,9 +26,7 @@
         color: #f1f1f1;
       }
 
-      &:nth-child(2) {
-        border: 1px solid $strong-gray;
-      }
+
     }
   }
 }

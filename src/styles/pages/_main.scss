@@ -10,11 +10,16 @@
 
     button {
       margin: 10px 0 0;
+      box-shadow: -1px 1px 9px $strong-gray;
+
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
 
   .search-section {
-    margin: 20px 0;
+    margin: 3px 0;
     padding: 20px 0;
   
     .search-input {
@@ -49,7 +54,7 @@
   }
 
   .images {
-    margin: 40px 0;
+    margin: 29px 0;
     padding: 20px 0 0;
     border-top: 1px solid $gray;
     text-align: center;

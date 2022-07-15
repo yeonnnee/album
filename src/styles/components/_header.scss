@@ -1,6 +1,9 @@
+@import '../constants/colors';
+
 header {
   padding: 20px;
   text-align: center;
+  box-shadow: 2px -1px 8px $strong-gray;
   
   p {
     font-size: 40px;

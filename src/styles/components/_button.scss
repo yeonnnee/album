@@ -3,16 +3,27 @@
 button {
 
   &.add {
-    background-color: $blue;
+    background-color: $sky-blue;
+    color: #fff;
     padding: 8px 10px;
   }
 
   &.cancel {
     background-color: $red;
+    box-shadow: 1px 2px 7px $red-shadow;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
 
   &.confirm {
     background-color: #fff;
+    box-shadow: 2px 2px 11px $shadow-gray;
+
+    &:hover {
+      box-shadow: 0 0 6px $shadow-gray;;
+    }
   }
 
   &.square {

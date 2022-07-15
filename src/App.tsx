@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from './components/Button';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
+import FileUploadeModal from './components/modals/FileUploadModal';
 import PageTitle from './components/PageTitle';
 import Pagination from './components/Pagination';
 import TextInput from './components/TextInput';
@@ -67,6 +68,8 @@ function App() {
         
         {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>
+
+      <FileUploadeModal />
     </>
 
   )

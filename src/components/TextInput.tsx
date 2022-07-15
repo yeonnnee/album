@@ -9,16 +9,19 @@ interface TextInputProps {
   value: string,
   onChange:(e:React.ChangeEvent<HTMLInputElement>) => void,
   onKeyUp?:(e:React.KeyboardEvent<HTMLElement>) => void,
-  reset?:() => void
+  reset?:() => void,
+  id?: string,
+  label?: string
 }
 
 export default function TextInput(props: TextInputProps) {
-  const { placeholder, value, showIcon, onChange, onKeyUp, reset } = props;
+  const { placeholder, value, showIcon, onChange, onKeyUp, reset, label, id } = props;
 
   return(
     <>
       { showIcon ? <FontAwesomeIcon icon={ faSearch } /> : null }
-      <input type="text" placeholder={placeholder} value={value || ''} onChange={onChange} onKeyUp={onKeyUp}/>
+      { label ? <label htmlFor={id}>{label}</label> : null }
+      <input id={id} type="text" placeholder={placeholder} value={value || ''} onChange={onChange} onKeyUp={onKeyUp}/>
       {reset && value.length > 0 ? <span onClick={reset}>x</span> : null}
     </>
   )

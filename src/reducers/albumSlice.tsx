@@ -45,9 +45,11 @@ const albumSlice = createSlice({
 
     },
     deleteAlbum: (state, action: PayloadAction<number>) => {
-      state = {
+      return state = {
         ...state,
         data: state.data.filter(album => album.id !== action.payload),
+        searchResult: state.data.slice((state.currentPage - 1) * 5, state.currentPage * 5),
+        total: state.data.length,
         totalPage: Math.ceil(state.total / state.size)
       }
     },

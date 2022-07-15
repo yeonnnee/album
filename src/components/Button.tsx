@@ -10,10 +10,10 @@ interface ButtonProps {
 }
 
 export default function Button (props: ButtonProps) {
-  const {text, type, shape} = props;
+  const {text, type, shape, onClick} = props;
   
   return (
-    <button className={`${type} ${shape}`}>{text}</button>
+    <button className={`${type} ${shape}`} onClick={onClick}>{text}</button>
   )
 }
 

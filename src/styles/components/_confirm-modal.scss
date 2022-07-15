@@ -1,0 +1,47 @@
+@import '../constants/colors';
+
+.confirm-modal {
+  position: absolute;
+  top: 31%;
+  left: 41%;
+  padding: 49px 20px 20px;
+  background-color: #fff;
+  height: 175px;
+  width: 330px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid $strong-gray;
+
+  .close-btn {
+    position: absolute;
+    top: -16px;
+    right: -17px;
+
+    .circle {
+      padding: 10px 14px;
+      border-radius: 48px;
+      color: #fff;
+    }
+  }
+
+  .buttons {
+    margin: 32px 0 0;
+    padding: 20px;
+    border-top: 1px solid $gray;
+
+    .circle {
+      border-radius: 36px;
+      padding: 8px 21px;
+
+      &:nth-child(1) {
+        margin: 0 10px 0 0;
+        line-height: 1.6;
+        color: #f1f1f1;
+      }
+
+      &:nth-child(2) {
+        border: 1px solid $strong-gray;
+      }
+    }
+  }
+}

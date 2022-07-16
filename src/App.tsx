@@ -57,16 +57,16 @@ function App() {
           </div>
         </div>
 
-        <ul className='images'>
           {
             !isLoading && albums.searchResult.length > 0 ?
-            albums.searchResult?.map((d: Album,index:number) => {
-              return (<ListItem title={d.title} id={d.id} key={index}/>)
-            })
+              <ul className='images'>
+                {albums.searchResult?.map((d: Album,index:number) => {
+                  return (<ListItem title={d.title} id={d.id} key={index}/>)
+                })}
+              </ul>
             :
             <NoResults resetSearchCondition={resetSearchCondition}/>
           }
-        </ul>
         
         {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>

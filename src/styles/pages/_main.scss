@@ -53,11 +53,12 @@
     }
   }
 
-  .images {
+  .images {    
     margin: 29px 0;
-    padding: 20px 0 0;
+    padding: 20px 60px 0;
     border-top: 1px solid $gray;
     text-align: center;
+    min-height: 750px;
 
     .image-wrapper {
       position: relative;
@@ -78,7 +79,7 @@
     }
 
     .item {
-      display: inline-block;
+      float: left;
       margin: 0 20px 20px 0;
       cursor: pointer;
       box-shadow: 2px 3px 10px #c0bdbd;
@@ -88,7 +89,7 @@
       }
 
       .image-title {
-        padding: 12px 5px;
+        padding: 12px;
         margin: -3px 0 0;
         text-align: left;
 
@@ -100,11 +101,11 @@
         }
       }
 
-      // &:hover {
-      //   box-shadow: 2px 3px 5px $strong-gray;
-      //   transform: translateY(-10px);
-      //   transition: all 0.3s ease;
-      // }
+      &:hover {
+        box-shadow: 2px 3px 5px $strong-gray;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+      }
 
     }
   }

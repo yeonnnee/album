@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from './components/Button';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
 import FileUploadeModal from './components/modals/FileUploadModal';
@@ -37,9 +38,10 @@ function App() {
       <Header />
       <div className='main-content'>
         <div className='content-title'>
-          <PageTitle title={"Images"} total={albums.total}/>
+          <PageTitle title={"Images"} total={albums.total} />
+          <Button text={"UPLOAD"} type={"add"} shape={"square"} onClick={() => setOpenAddImageModal(true)}/>
         </div>
-        <SearchSection reset={reset} setOpenAddImageModal={() => setOpenAddImageModal(true)} />
+        <SearchSection reset={reset} />
         {
           !isLoading && albums.searchResult.length > 0 ?
             <ul className='images'>

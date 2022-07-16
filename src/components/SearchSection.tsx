@@ -5,6 +5,7 @@ import { setSearchString } from "../reducers/searchSlice";
 import { RootState } from "../store";
 import Button from "./Button";
 import CheckBox from "./CheckBox";
+import ConfirmModal from "./modals/ConfirmModal";
 import TextInput from "./TextInput";
 
 interface SearchSectionProps{
@@ -13,6 +14,7 @@ interface SearchSectionProps{
 
 export default function SearchSection(props: SearchSectionProps) {
   const { reset } = props;
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   const albums = useSelector((state: RootState) => state.album);
   const searchString = useSelector((state: RootState) => state.searchCondition.searchString);
@@ -37,19 +39,24 @@ export default function SearchSection(props: SearchSectionProps) {
 
   function deleteSelectedItem() {
     setSelectAll(!selectAll);
-    dispatch(deleteAlbum(selectedAlbums.map(x =>x.id)));
+    dispatch(deleteAlbum(selectedAlbums.map(x => x.id)));
+    setOpenConfirmModal(false);
   }
 
 
   return (
-    <div className='search-section'>
-      <div className='select-all'>
-        <CheckBox type={"all"} labelText={"Select All"} id={"select-all"} onClick={selectAllAlbums}/>
-        {selectedAlbums.length > 0 ? <Button text={"DELETE"} type={"cancel"} shape={"square"} onClick={deleteSelectedItem}/>: null}
+    <>
+      <div className='search-section'>
+        <div className='select-all'>
+          <CheckBox type={"all"} labelText={"Select All"} id={"select-all"} onClick={selectAllAlbums}/>
+          {selectedAlbums.length > 0 ? <Button text={"DELETE"} type={"cancel"} shape={"square"} onClick={() => setOpenConfirmModal(true)} />: null}
+        </div>
+        <div className='search-input'>
+          <TextInput reset={ reset } placeholder={'Search'} showIcon={true} onChange={setValue} onKeyUp={search} value={searchString}/>
+        </div>
       </div>
-      <div className='search-input'>
-        <TextInput reset={ reset } placeholder={'Search'} showIcon={true} onChange={setValue} onKeyUp={search} value={searchString}/>
-      </div>
-    </div>
-  )
+      <ConfirmModal isActive={openConfirmModal} text={'Are you sure you want to delete it?'} onCancel={()=> setOpenConfirmModal(false)} onConfirm={deleteSelectedItem}/>
+    </>
+  
+    )
 }

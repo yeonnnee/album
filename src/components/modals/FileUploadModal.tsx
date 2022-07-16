@@ -35,20 +35,28 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
       setFileName({ ...fileName, error: 'Required'});
       return false;
     };
+
+    return true;
+  }
+
+  function reset() {
+    setTitle({text: '', error:''});
+    setFileName({text: '', error:''});
+    onCancel();
   }
 
   function onSave() {
     if(!validation()) return;
 
     dispatch(addAlbum(title.text));
-    onCancel();
+    reset();
   }
 
   function onEdit() {
     if(!id || !validation()) return;
 
     dispatch(editAlbum({id: id, title: title.text}));
-    onCancel();
+    reset();
   }
 
   function uploadFile(e:React.ChangeEvent) {
@@ -83,7 +91,7 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
           </div>
 
           <div className="buttons">
-            <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={onCancel}/>
+            <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={reset}/>
             {
               mode === 'add' ?
               <Button text={'Save'} type={"confirm"} shape={"circle"} onClick={onSave}/>

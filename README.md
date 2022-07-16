@@ -19,6 +19,9 @@ Upload Image Application with React
 - search by album title
 - CRUD
 
+### API 
+- posts: https://jsonplaceholder.typicode.com/albums
+- image: https://place-hold.it/
 
 ### Get Started
 

@@ -34,10 +34,10 @@ export default function ListItem(props: ListItemProps) {
   return (
     <>
       <li className="item">
-        <div className='image-wrapper' onClick={()=>setActiveDetailModal(true)}>
+        <div className='image-wrapper'>
           <p>Loading...</p>
           <CheckBox type={'single'} id={`album-${id}`} onClick={selectItem}/>
-          <img src="https://place-hold.it/300" alt={title} />
+          <img src="https://place-hold.it/300" alt={title}  onClick={()=>setActiveDetailModal(true)}/>
         </div>
         <div className='image-title'>
           <p className='title'>{title}</p>

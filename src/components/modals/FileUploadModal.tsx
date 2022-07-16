@@ -32,20 +32,21 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
     };
 
     if(!fileName.text) {
-      setFileName({ ...fileName, error: 'Required'}); 
-      return;
-    }
+      setFileName({ ...fileName, error: 'Required'});
+      return false;
+    };
   }
 
   function onSave() {
-    validation();
+    if(!validation()) return;
+
     dispatch(addAlbum(title.text));
     onCancel();
   }
 
   function onEdit() {
-    if(!id) return;
-    validation();
+    if(!id || !validation()) return;
+
     dispatch(editAlbum({id: id, title: title.text}));
     onCancel();
   }

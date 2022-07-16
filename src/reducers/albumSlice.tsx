@@ -50,8 +50,8 @@ const albumSlice = createSlice({
         totalPage: Math.ceil(updatedData.length / state.size)
       }
     },
-    deleteAlbum: (state, action: PayloadAction<number>) => {
-      const updatedData = state.data.filter(album => album.id !== action.payload);
+    deleteAlbum: (state, action: PayloadAction<number[]>) => {
+      const updatedData = state.data.filter(album => !action.payload.includes(album.id));
       const updatedPageData = updatedData.slice((state.currentPage - 1) * 5, (state.currentPage) * 5);
       const searchResult = updatedPageData.length === 0 ? updatedData.slice((state.currentPage - 2) * 5, state.currentPage * 5): updatedPageData;
   
@@ -63,6 +63,7 @@ const albumSlice = createSlice({
         currentPage: updatedPageData.length === 0 ? state.currentPage - 1 : state.currentPage,
         totalPage: Math.ceil( updatedData.length / state.size)
       }
+
     },
     editAlbum: (state, action: PayloadAction<{id: number, title: string}>) => {
       const updatedData = state.data.map(d => {
@@ -104,6 +105,33 @@ const albumSlice = createSlice({
   
     },
 
+    selectAlbum: (state, action:PayloadAction<{type:'all' | 'select', checked: boolean, id?: number}>) => {
+      if(action.payload.type === 'all') {
+        return state ={
+          ...state, 
+          searchResult: state.searchResult.map(x => {
+            return {
+              ...x,
+              isChecked:action.payload.checked
+            }
+          })
+        }
+      } else {  
+        return state = {
+          ...state,
+          searchResult: state.searchResult.map(x => {
+            if(x.id === action.payload.id) {
+              return {
+                ...x,
+                isChecked:action.payload.checked
+              }
+            } 
+            return x;
+          })
+        }
+      }
+    },
+
     getAlbumsByPage: (state, action: PayloadAction<number>) => {
       return state = {
         ...state,
@@ -115,5 +143,5 @@ const albumSlice = createSlice({
 });
 
 
-export const { getAblums, addAlbum, deleteAlbum, editAlbum, getAlbumsByPage, searchAlbum} = albumSlice.actions;
+export const { selectAlbum, getAblums, addAlbum, deleteAlbum, editAlbum, getAlbumsByPage, searchAlbum} = albumSlice.actions;
 export default albumSlice.reducer;

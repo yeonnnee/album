@@ -22,10 +22,9 @@ export default function More(props: MoreProps) {
   useClickOutside(btnRef);
 
   function deleteItem() {
-    dispatch(deleteAlbum(+id));
+    dispatch(deleteAlbum([+id]));
     setOpenConfirmModal(false);
   }
-
 
   return(
     <>

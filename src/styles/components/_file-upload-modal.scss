@@ -54,10 +54,7 @@
       border-top: 1px solid $gray;
       text-align: center;
   
-      .circle {
-        border-radius: 36px;
-        padding: 8px 21px;
-  
+      .circle {  
         &:nth-child(1) {
           margin: 0 10px 0 0;
           color: #f1f1f1;

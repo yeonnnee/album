@@ -19,15 +19,10 @@
     border-top: 1px solid $gray;
 
     .circle {
-      border-radius: 36px;
-      padding: 8px 21px;
-
       &:nth-child(1) {
         margin: 0 10px 0 0;
         color: #f1f1f1;
       }
-
-
     }
   }
 }

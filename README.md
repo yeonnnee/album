@@ -1,6 +1,11 @@
 # Album
 Upload Image Application with React
 
+<br />
+
+### Period
+2022-07-14 ~ 2022-07-16
+
 
 ### Stacks 
 - React

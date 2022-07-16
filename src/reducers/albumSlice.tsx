@@ -51,12 +51,17 @@ const albumSlice = createSlice({
       }
     },
     deleteAlbum: (state, action: PayloadAction<number>) => {
+      const updatedData = state.data.filter(album => album.id !== action.payload);
+      const updatedPageData = updatedData.slice((state.currentPage - 1) * 5, (state.currentPage) * 5);
+      const searchResult = updatedPageData.length === 0 ? updatedData.slice((state.currentPage - 2) * 5, state.currentPage * 5): updatedPageData;
+  
       return state = {
         ...state,
-        data: state.data.filter(album => album.id !== action.payload),
-        searchResult: state.data.slice((state.currentPage - 1) * 5, state.currentPage * 5),
-        total: state.data.length,
-        totalPage: Math.ceil(state.total / state.size)
+        data: updatedData,
+        searchResult: searchResult,
+        total: updatedData.length,
+        currentPage: updatedPageData.length === 0 ? state.currentPage - 1 : state.currentPage,
+        totalPage: Math.ceil( updatedData.length / state.size)
       }
     },
     editAlbum: (state, action: PayloadAction<{id: number, title: string}>) => {

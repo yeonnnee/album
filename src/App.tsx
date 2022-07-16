@@ -64,7 +64,7 @@ function App() {
               return (<ListItem title={d.title} id={d.id} key={index}/>)
             })
             :
-            <NoResults/>
+            <NoResults resetSearchCondition={resetSearchCondition}/>
           }
         </ul>
         

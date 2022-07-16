@@ -1,8 +1,6 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-
 interface TextInputProps {
   placeholder:string,
   showIcon: boolean,

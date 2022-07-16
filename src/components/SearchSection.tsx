@@ -9,11 +9,10 @@ import TextInput from "./TextInput";
 
 interface SearchSectionProps{
   reset: () => void,
-  setOpenAddImageModal: () => void
 }
 
 export default function SearchSection(props: SearchSectionProps) {
-  const { reset, setOpenAddImageModal } = props;
+  const { reset } = props;
 
   const albums = useSelector((state: RootState) => state.album);
   const searchString = useSelector((state: RootState) => state.searchCondition.searchString);
@@ -47,8 +46,6 @@ export default function SearchSection(props: SearchSectionProps) {
       <div className='select-all'>
         <CheckBox type={"all"} labelText={"Select All"} id={"select-all"} onClick={selectAllAlbums}/>
         {selectedAlbums.length > 0 ? <Button text={"DELETE"} type={"cancel"} shape={"square"} onClick={deleteSelectedItem}/>: null}
-        <Button text={"UPLOAD"} type={"add"} shape={"square"} onClick={setOpenAddImageModal}/>
-      
       </div>
       <div className='search-input'>
         <TextInput reset={ reset } placeholder={'Search'} showIcon={true} onChange={setValue} onKeyUp={search} value={searchString}/>

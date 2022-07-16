@@ -4,6 +4,7 @@ import Button from './components/Button';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
 import FileUploadeModal from './components/modals/FileUploadModal';
+import NoResults from './components/NoResults';
 import PageTitle from './components/PageTitle';
 import Pagination from './components/Pagination';
 import TextInput from './components/TextInput';
@@ -18,7 +19,7 @@ function App() {
   const [openAddImageModal, setOpenAddImageModal] = useState(false);
   const albums = useSelector((state:RootState) => state.album);
   const dispatch = useDispatch();
-  const {data, error, isLoading} = useGetAlbumsQuery(null);
+  const {data, isLoading} = useGetAlbumsQuery(null);
 
   const search = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key !== 'Enter' || searchString.length === 0) return;
@@ -57,18 +58,21 @@ function App() {
         </div>
 
         <ul className='images'>
-          {albums.searchResult?.map((d: Album,index:number) => {
-            return (<ListItem title={d.title} id={d.id} key={index}/>)
-          })}
+          {
+            !isLoading && albums.searchResult.length > 0 ?
+            albums.searchResult?.map((d: Album,index:number) => {
+              return (<ListItem title={d.title} id={d.id} key={index}/>)
+            })
+            :
+            <NoResults/>
+          }
         </ul>
-
         
         {albums.searchResult.length > 0 ? <Pagination /> : null}
       </div>
 
       <FileUploadeModal isActive={openAddImageModal} mode={"add"} onCancel={()=>setOpenAddImageModal(false)}/>
     </>
-
   )
 }
 

@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
   background-color: #0000007d;
-  z-index: 1;
+  z-index: 10;
 
   .modal-content {
     position: absolute;
@@ -25,11 +25,22 @@
       font-size: 20px;
       color: #fff;
       
+      .circle {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #fff;
+        background-color: transparent;
+        box-shadow: none;
+
+        &:hover {
+          color: $red;
+        }
+      }
     }
 
     .modal-form {
       padding: 20px;
-
 
       label {
         display: block;
@@ -46,6 +57,11 @@
         &.invalid {
           border: 1px solid $red;
         }
+      }
+
+      .detail-image {
+        margin: 10px 0;
+        text-align: center;
       }
     }
 

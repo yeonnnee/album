@@ -9,8 +9,9 @@ import FileUploader from "../FileUploader";
 
 interface FileUploadeModalProps {
   isActive: boolean,
-  mode: 'add' | 'edit',
+  mode: 'add' | 'edit' | 'detail',
   onCancel: () => void,
+  onDelete?: () => void,
   originTitle?: string,
   id?: number
 }
@@ -21,7 +22,8 @@ interface Value {
 }
 
 export default function FileUploadeModal(props: FileUploadeModalProps) {
-  const {mode, onCancel, originTitle, isActive, id} = props;
+  const { mode, onCancel,onDelete, originTitle, isActive, id } = props;
+  const [viewType, setViewType] = useState(mode);
   const [title, setTitle] = useState<Value>({text: originTitle || '', error: ''});
   const [fileName, setFileName] = useState<Value>({text: '', error: ''});
   const dispatch = useDispatch();
@@ -40,8 +42,12 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
   }
 
   function reset() {
-    setTitle({text: '', error:''});
-    setFileName({text: '', error:''});
+    if (mode === 'add') {
+      setTitle({text: '', error:''});
+      setFileName({text: '', error:''});
+    }
+
+    setViewType(mode);
     onCancel();
   }
 
@@ -65,10 +71,15 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
     setFileName({text: file, error:''});
   }
 
-  const setValue = (e:React.ChangeEvent<HTMLInputElement>) => {
+  function setValue(e:React.ChangeEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement;
     setTitle({...title, text: target.value, error:''});
   }
+
+  function convertViewType() {
+    setViewType('edit');
+  }
+
 
   return(
     <>
@@ -76,29 +87,56 @@ export default function FileUploadeModal(props: FileUploadeModalProps) {
       isActive ? 
       <div className="file-upload-modal">
         <div className="modal-content">
-          <div className="modal-header">{mode === 'add' ? 'Upload' : 'Edit'}</div>
+          <div className="modal-header">
+            <p>
+              {viewType === 'add' ? 'Upload' : viewType === 'edit' ? 'Edit' : 'Detail'}
+            </p>
+            {
+              viewType === 'detail' ? 
+                <Button text={'X'} type={"cancel"} shape={"circle"} onClick={onCancel}/>    
+                  :
+                null
+            } 
+          </div>
 
           <div className="modal-form">
             <TextInput 
-              label={"Title"} 
-              error={title.error} 
-              placeholder={'Enter the image title'} 
-              showIcon={false} 
-              onChange={setValue} 
+              label={"Title"}
+              error={title.error}
+              placeholder={'Enter the image title'}
+              showIcon={false}
+              onChange={setValue}
               value={title.text}
+              disabled={viewType === 'detail' }
             />
-            <FileUploader uploadFile={uploadFile} fileName={fileName.text} error={fileName.error}/>
-          </div>
-
-          <div className="buttons">
-            <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={reset}/>
             {
-              mode === 'add' ?
-              <Button text={'Save'} type={"confirm"} shape={"circle"} onClick={onSave}/>
-              :
-              <Button text={'Edit'} type={"confirm"} shape={"circle"} onClick={onEdit}/>
+              viewType !== 'detail' ? 
+              <FileUploader uploadFile={uploadFile} fileName={fileName.text} error={fileName.error}/>
+                :
+              <div className="detail-image">
+                <img src="https://place-hold.it/410X300?text=Detail Image" alt={title.text} />
+              </div>
             }
           </div>
+
+            {
+              viewType !== 'detail' ?
+              <div className="buttons">
+                <Button text={'Cancel'} type={"cancel"} shape={"circle"} onClick={reset}/>
+                {
+                  viewType === 'add' ?
+                  <Button text={'Save'} type={"confirm"} shape={"circle"} onClick={onSave}/>
+                  :
+                  <Button text={'Edit'} type={"confirm"} shape={"circle"} onClick={onEdit}/>
+                }
+              </div>
+              :
+              <div className="buttons">
+                <Button text={'Delete'} type={"cancel"} shape={"circle"} onClick={onDelete || reset}/>
+                <Button text={'Edit'} type={"confirm"} shape={"circle"} onClick={convertViewType}/>
+              </div>
+            }
+
         </div>
       </div> 
       : 

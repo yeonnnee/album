@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './components/Button';
+import CheckBox from './components/CheckBox';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
 import FileUploadeModal from './components/modals/FileUploadModal';
@@ -8,7 +9,7 @@ import NoResults from './components/NoResults';
 import PageTitle from './components/PageTitle';
 import Pagination from './components/Pagination';
 import TextInput from './components/TextInput';
-import { getAblums, searchAlbum } from './reducers/albumSlice';
+import { deleteAlbum, getAblums, searchAlbum, selectAlbum } from './reducers/albumSlice';
 import { useGetAlbumsQuery } from './services/albums';
 import { RootState } from './store';
 import './styles/pages/_main.scss';
@@ -20,6 +21,10 @@ function App() {
   const albums = useSelector((state:RootState) => state.album);
   const dispatch = useDispatch();
   const {data, isLoading} = useGetAlbumsQuery(null);
+  const selectedAlbums = albums.searchResult.filter(x => x.isChecked);
+
+  const [selectAll, setSelectAll] = useState(false);
+
 
   const search = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key !== 'Enter' || searchString.length === 0) return;
@@ -36,9 +41,21 @@ function App() {
     dispatch(searchAlbum({type: 'reset', payload: ''}));
   }
 
+  function selectAllAlbums() {
+    setSelectAll(!selectAll);
+    dispatch(selectAlbum({type: 'all', checked: !selectAll}));
+
+  }
+
+  function deleteSelectedItem() {
+    setSelectAll(!selectAll);
+    dispatch(deleteAlbum(selectedAlbums.map(x =>x.id)));
+
+  }
 
   useEffect(() => {
     dispatch(getAblums(data || []));
+
   },[dispatch, data]);
 
 
@@ -48,10 +65,14 @@ function App() {
       <div className='main-content'>
         <div className='content-title'>
           <PageTitle title={"Images"} total={albums.total}/>
-          <Button text={"+Add Image"} type={"add"} shape={"square"} onClick={() => setOpenAddImageModal(true)}/>
+          <Button text={"UPLOAD"} type={"add"} shape={"square"} onClick={() => setOpenAddImageModal(true)}/>
         </div>
 
         <div className='search-section'>
+          <div className='select-all'>
+            <CheckBox labelText={"Select All"} id={"select-all"} onClick={selectAllAlbums}/>
+            {selectedAlbums.length > 0 ? <Button text={"DELETE"} type={"cancel"} shape={"square"} onClick={deleteSelectedItem}/>: null}
+          </div>
           <div className='search-input'>
             <TextInput reset={resetSearchCondition} placeholder={'Search'} showIcon={true} onChange={setValue} onKeyUp={search} value={searchString}/>
           </div>
@@ -61,7 +82,7 @@ function App() {
             !isLoading && albums.searchResult.length > 0 ?
               <ul className='images'>
                 {albums.searchResult?.map((d: Album,index:number) => {
-                  return (<ListItem title={d.title} id={d.id} key={index}/>)
+                  return (<ListItem title={d.title} id={d.id} key={index} selectAll={selectAll}/>)
                 })}
               </ul>
             :

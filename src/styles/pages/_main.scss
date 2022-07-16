@@ -21,6 +21,17 @@
   .search-section {
     margin: 3px 0;
     padding: 20px 0;
+
+    .select-all {
+      float: left;
+      margin: 18px 20px;
+
+      .square {
+        padding: 5px;
+        margin: 0 0 0 10px;
+        color: #fff;
+      }
+    }
   
     .search-input {
       position: relative;
@@ -88,6 +99,13 @@
         margin:  0;
       }
 
+      .checkbox {
+        position: absolute;
+        left: 29px;
+        top: 8px;
+        z-index: 1;
+      }
+
       .image-title {
         padding: 12px;
         margin: -3px 0 0;
@@ -103,7 +121,6 @@
 
       &:hover {
         box-shadow: 2px 3px 5px $strong-gray;
-        transform: translateY(-10px);
         transition: all 0.3s ease;
       }
 

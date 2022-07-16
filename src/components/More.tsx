@@ -1,7 +1,8 @@
 import { faEllipsis, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import useClickOutside from '../hooks/useClickOutside';
 import {deleteAlbum} from '../reducers/albumSlice';
 import '../styles/components/_more-btn.scss';
 import ConfirmModal from './modals/ConfirmModal';
@@ -16,17 +17,20 @@ export default function More(props: MoreProps) {
   const { id, title } = props;
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const btnRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
+  useClickOutside(btnRef);
 
   function deleteItem() {
     dispatch(deleteAlbum(+id));
     setOpenConfirmModal(false);
   }
 
+
   return(
     <>
       <div className='more-btn'>
-        <input type="checkbox" id={id}/>
+        <input type="checkbox" id={id} ref={btnRef}/>
         <label htmlFor={id}>
           <FontAwesomeIcon icon={faEllipsis}/>
         </label>

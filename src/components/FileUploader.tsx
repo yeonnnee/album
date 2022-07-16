@@ -9,7 +9,7 @@ interface FileUploaderProps {
   error?: string
 }
 
-export default function FileUploader (props: FileUploaderProps) {
+export default function FileUploader(props: FileUploaderProps) {
   const { uploadFile, fileName, error } = props
   useEffect(() => {
     document.body.style.cssText = `overflow:hidden`;

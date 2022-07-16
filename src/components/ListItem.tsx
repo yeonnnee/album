@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAlbum } from '../reducers/albumSlice';
+import { RootState } from '../store';
 import CheckBox from './CheckBox';
 import More from './More';
 
 export interface ListItemProps {
   title: string,
   id: number,
-  selectAll: boolean
 }
 
 export default function ListItem(props: ListItemProps) {
-  const {title, id, selectAll} = props;
-  const [checked, setChecked] = useState(false);
+  const {title, id} = props;
+  const selectedAlbums = useSelector((state: RootState) => state.album.searchResult.filter(x => x.isChecked));
+  const [checked, setChecked] = useState(selectedAlbums.length === 5 || false);
+  
   const dispatch = useDispatch();
 
   function selectItem() {
@@ -20,15 +22,12 @@ export default function ListItem(props: ListItemProps) {
     dispatch(selectAlbum({type: 'select', id: +id, checked: !checked}));
   };
 
-  useEffect(() => {
-    setChecked(selectAll);
-  },[selectAll])
 
   return (
     <li className="item" onClick={selectItem}>
       <div className='image-wrapper'>
         <p>Loading...</p>
-        <CheckBox id={`album-${id}`} onClick={()=>console.log('click')}/>
+        <CheckBox type={'single'} id={`album-${id}`} onClick={selectItem}/>
         <img src="https://place-hold.it/300" alt={title}/>
       </div>
       <div className='image-title'>

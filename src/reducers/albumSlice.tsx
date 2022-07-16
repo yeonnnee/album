@@ -39,14 +39,15 @@ const albumSlice = createSlice({
         id: state.total + 1,
         userId: 1,
         title: action.payload
-      }
+      };
+      const updatedData = [newAlbum, ...state.data];
       return state = {
         ...state,
-        data: [newAlbum, ...state.data],
-        searchResult: state.data.slice(0, 5),
-        total: state.data.length,
+        data: updatedData,
+        searchResult: updatedData.slice(0, 5),
+        total: updatedData.length,
         currentPage: 1,
-        totalPage: Math.ceil(state.total / state.size)
+        totalPage: Math.ceil(updatedData.length / state.size)
       }
     },
     deleteAlbum: (state, action: PayloadAction<number>) => {
@@ -59,21 +60,21 @@ const albumSlice = createSlice({
       }
     },
     editAlbum: (state, action: PayloadAction<{id: number, title: string}>) => {
+      const updatedData = state.data.map(d => {
+        if(d.id === action.payload.id) {
+          return {
+            ...d,
+            title: action.payload.title
+          }
+        }
+        return d;
+      });
+
       return state = {
         ...state,
-        data: state.data.map(d => {
-          if(d.id === action.payload.id) {
-            return {
-              ...d,
-              title: action.payload.title
-            }
-          }
-          return d;
-        }),
-        searchResult: state.data.slice((state.currentPage - 1) * 5, state.currentPage * 5)
+        data: updatedData,
+        searchResult: updatedData.slice((state.currentPage - 1) * 5, state.currentPage * 5)
       }
-      
-
     },
 
     searchAlbum: (state, action: PayloadAction<{type: 'search' | 'reset', payload: string}>) => {

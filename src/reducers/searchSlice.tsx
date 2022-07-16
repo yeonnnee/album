@@ -31,5 +31,5 @@ const searchSlice = createSlice({
 });
 
 
-  export const { setSearchString, resetSearchCondition } = searchSlice.actions;
-  export default searchSlice.reducer;
+export const { setSearchString, resetSearchCondition } = searchSlice.actions;
+export default searchSlice.reducer;

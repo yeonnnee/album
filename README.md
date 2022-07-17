@@ -22,7 +22,7 @@ Upload Image Application with React
 - 5 posts per page
 - pagination
 - search by album title
-- CRUD
+- CRUD (Please Note that data does not persist)
 
 ### API 
 - posts: https://jsonplaceholder.typicode.com/albums

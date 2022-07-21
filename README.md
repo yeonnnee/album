@@ -15,6 +15,9 @@ Upload Image Application with React
 - typescript
 
 
+### Preview
+
+<img width="300" alt="preview" src="https://user-images.githubusercontent.com/61894688/180165811-90ce1358-9338-443e-9859-a73872181017.png">
 
 ### Features
 

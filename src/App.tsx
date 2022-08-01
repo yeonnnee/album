@@ -22,6 +22,8 @@ function App() {
   const dispatch = useDispatch();
 
   console.log('test2')
+  console.log('test2')
+  console.log('test2')
 
   const reset = () => {
     dispatch(resetSearchCondition());

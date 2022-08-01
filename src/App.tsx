@@ -21,6 +21,7 @@ function App() {
   const albums = useSelector((state:RootState) => state.album);
   const dispatch = useDispatch();
 
+  console.log('test')
 
   const reset = () => {
     dispatch(resetSearchCondition());

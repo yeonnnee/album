@@ -1,19 +1,21 @@
 # Album
+
 Upload Image Application with React
 
 <br />
 
 ### Period
+
 2022-07-14 ~ 2022-07-16
 
+### Stacks
 
-### Stacks 
 - React
 - Redux-toolkit
 - RTK query
 - scss
 - typescript
-
+- cypress
 
 ### Preview
 
@@ -27,7 +29,8 @@ Upload Image Application with React
 - search by album title
 - CRUD (Please Note that data does not persist)
 
-### API 
+### API
+
 - posts: https://jsonplaceholder.typicode.com/albums
 - image: https://place-hold.it/
 
@@ -37,7 +40,3 @@ Upload Image Application with React
 npm i
 npm run start
 ```
-
-
-
-

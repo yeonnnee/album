@@ -37,6 +37,6 @@ Upload Image Application with React
 ### Get Started
 
 ```
-npm i
-npm run start
+yarn i
+yarn run start
 ```

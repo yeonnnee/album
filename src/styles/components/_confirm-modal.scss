@@ -1,0 +1,28 @@
+@import '../constants/colors';
+
+.confirm-modal {
+  position: absolute;
+  top: 31%;
+  left: 41%;
+  padding: 49px 20px 20px;
+  background-color: #fff;
+  height: 175px;
+  width: 330px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 11px $strong-gray;
+  z-index: 99;
+
+  .buttons {
+    margin: 32px 0 0;
+    padding: 20px;
+    border-top: 1px solid $gray;
+
+    .circle {
+      &:nth-child(1) {
+        margin: 0 10px 0 0;
+        color: #f1f1f1;
+      }
+    }
+  }
+}

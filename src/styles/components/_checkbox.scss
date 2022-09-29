@@ -1,0 +1,33 @@
+.checkbox {
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content:'';
+    position: absolute;
+    left: -21px;
+    top: 1px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #191818;
+    border-radius: 5px;
+  }
+}
+
+input:checked ~ label {
+  &::before {
+    background-color: #191818;
+  }
+  &::after {
+    content:'';
+    position: absolute;
+    left: -15px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(35deg);
+    cursor: pointer;
+  }
+}

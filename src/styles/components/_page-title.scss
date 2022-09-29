@@ -1,0 +1,23 @@
+@import '../constants/colors';
+
+.page-title {
+  font-size: 35px;
+
+  span {
+    margin: 0 0 0 5px;
+    font-size: 15px;
+    color: $pink;
+
+    &::before {
+      content:'(';
+      color: #000;
+    }
+
+    &::after {
+      content: ')';
+      color: #000;
+
+    }
+  }
+
+}

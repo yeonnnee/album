@@ -1,0 +1,127 @@
+@import '../constants/colors';
+
+.main-content {
+  padding: 49px 20px 20px;
+
+  .content-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      margin: 10px 0 0;
+      box-shadow: -1px 1px 9px $strong-gray;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .search-section {
+    margin: 3px 0;
+    padding: 20px 0;
+
+    .select-all {
+      float: left;
+      margin: 18px 20px;
+
+      .square {
+        padding: 5px;
+        margin: 0 0 0 10px;
+        color: #fff;
+      }
+    }
+  
+    .search-input {
+      position: relative;
+      float: right;
+      width: 300px;
+      padding: 7px 17px;
+      border: 1px solid #000;
+      border-radius: 20px;
+
+      .fa-magnifying-glass {
+        position: absolute;
+        left: 15px;
+        top: 11px;
+        font-size: 13px;
+        opacity: 0.6;
+      }
+
+      input {
+        padding: 0 0 0 20px;
+        width: 93%;
+      }
+
+      span {
+        position: absolute;
+        right: 14px;
+        top: 6px;
+        color: $red;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .images {    
+    margin: 29px 0;
+    padding: 29px 0 20px 89px;
+    border-top: 1px solid $gray;
+
+    .image-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+
+      p {
+        position: absolute;
+        top: 150px;
+        left: 120px;
+      }
+
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    .item {
+      display: inline-block;
+      margin: 0 20px 20px 0;
+      box-shadow: 2px 3px 10px #c0bdbd;
+      cursor: pointer;
+
+      &:nth-last-child(1) {
+        margin: 0;
+      }
+
+      .checkbox {
+        position: absolute;
+        left: 29px;
+        top: 8px;
+        z-index: 1;
+      }
+
+      .image-title {
+        padding: 12px;
+        margin: -3px 0 0;
+        text-align: left;
+
+        .title {
+          width:200px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+        }
+      }
+
+      &:hover {
+        box-shadow: 2px 3px 5px $strong-gray;
+        transition: all 0.3s ease;
+      }
+
+    }
+  }
+}
